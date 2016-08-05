@@ -1,0 +1,42 @@
+{
+  "title": "Decryption job description",
+  "type": "object",
+  "properties": {
+    "container": {
+      "title": "container path",
+      "type": "string"
+    },
+    "outputDirectory": {
+      "title": "Output directory path",
+      "type": "string"
+    },
+    "overwriteFilesInOutputDirectory": {
+      "title": "Overwrite files in output directory path",
+      "type": "boolean"
+    },
+    "user": {
+      "title": "user definition",
+      "anyOf": [
+        {
+          "title": "user id",
+          "type": "integer"
+        },
+        {
+          "title": "user private key",
+          "type": "object",
+          "properties": {
+            "privateKey": { "type": "string", "minLength": 1 },
+            "secretSeed": { "type": "string" },
+            "userId": { "type": "integer" }
+          },
+          "required": [ "privateKey" ]
+        }
+      ]
+    },
+    "checkExternal": {
+      "type": "boolean",
+      "description": "If set to false, the decryptor will not try to get any of the attribute secret keys that the user needs in order to decrypt the file bag. (default: false)"
+    }
+  },
+  "required": [ "container", "outputDirectory", "user" ]
+}

@@ -1,0 +1,30 @@
+{
+  "title": "Additional user attribute description",
+  "type": "object",
+  "properties": {
+    "expire": {
+      "type": "array",
+      "description": "This optional property describes the time intervals that this attribute has to be available to the user through an external service",
+      "minItems": 1,
+      "items": {
+        "title": "time span",
+        "type": "object",
+        "properties": {
+          "span": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 2,
+            "items": { "type": "integer" }
+          },
+          "timezone": { "type": "string" },
+          "strict": { "type": "boolean" }
+        },
+        "required": [ "span" ]
+      }
+    },
+    "external": {
+      "type": "boolean",
+      "description": "This optional property describes that this attribute is dynamic and should not be put into the user's secret key statically"
+    }
+  }
+}

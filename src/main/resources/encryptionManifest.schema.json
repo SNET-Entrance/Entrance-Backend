@@ -1,0 +1,121 @@
+{
+  "title": "Encryption job description",
+  "type": "object",
+  "properties": {
+    "files": {
+      "title": "files",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "title": "file",
+        "type": "object",
+        "properties": {
+          "path": {
+            "description": "Path(s) to files that need to be encrypted",
+            "anyOf": [
+              { "type": "string", "minLength": 1 },
+              { "type": "array", "items": { "type": "string", "minLength": 1 }, "minItems": 1 }
+            ]
+          },
+          "policy": {
+            "description": "Optional policy string when encrypted with ABE (non-processed: numerical attributes are not expanded)",
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "title": "Encryption type",
+            "type": "string",
+            "minLength": 1
+          },
+          "expire": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "title": "time span",
+              "type": "object",
+              "properties": {
+                "span": {
+                  "type": "array",
+                  "minItems": 1,
+                  "maxItems": 2,
+                  "items": { "type": "integer" }
+                },
+                "timezone": { "type": "string" },
+                "strict": { "type": "boolean" }
+              },
+              "required": [ "span" ]
+            }
+          },
+          "revoked": {
+            "title": "Revoked users",
+            "description": "List of revoked users which cannot decrypt this especially if their attribute set would satisfy the policy",
+            "type": "object",
+            "properties": {
+              "users": {
+                "title": "user array",
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "usersType": {
+                "title": "Array item type",
+                "description": "Determines how the strings in the users array should be interpreted (Example: \"num10\" for numeric user ID in base 10 notation). This greatly depends on the implemented scheme.",
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [ "users", "usersType" ]
+          }
+        },
+        "required": [ "path", "type" ]
+      }
+    },
+    "outfile": {
+      "title": "Output file path",
+      "type": "string",
+      "minLength": 1
+    },
+    "overwriteOutfile": {
+      "title": "Overwrite flag for output file path",
+      "type": "boolean"
+    },
+    "description": {
+      "title": "Description of the container content",
+      "type": "string"
+    },
+    "hidePolicy": {
+      "title": "Hides the policy string in the final container (default: false)",
+      "type": "boolean"
+    },
+    "owner": {
+      "title": "Data owner information for the container in case somebody wants some contact information (everything is optional)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "name": { "type": "string", "minLength": 1 },
+        "emails": {
+          "title": "E-Mail addresses of the owner",
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "minItems": 1
+        },
+        "urls": {
+          "title": "URLs of the owner",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "value": { "type": "string", "minLength": 1 },
+              "type": { "type": "string", "minLength": 1 }
+            },
+            "required": [ "value", "type" ]
+          },
+          "minItems": 1
+        }
+      }
+    }
+  },
+  "required": [ "files", "outfile" ]
+}

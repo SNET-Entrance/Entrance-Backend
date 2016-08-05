@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .class > .heading {
+            font-weight: bold;
+            font-size: large;
+        }
+        .class > .content {
+            padding-left: 25px;
+        }
+        .class > .content.collapsed {
+            display: none;
+        }
+        .class > .heading:before {
+            content: "\25BE";
+            margin-right: 5px;
+        }
+        .class > .heading.collapsed:before {
+            content: "\25B8";
+        }
+        .instance {
+            border: dotted 1px;
+        }
+    </style>
+</head>
+<body>
+{{#classes}}
+<div class="class">
+    <div class="heading collapsed" data-collapse="{{name}}">Class: {{name}} (#{{numberOfInstances}})</div>
+    <div id="{{name}}" class="content collapsed">
+        {{#instances}}
+        <div class="instance">
+            <div class="content">
+                <dl class="keyValue">
+                    {{#keyValues}}
+                    <dt>{{key}}</dt>
+                    <dd>{{value}}</dd>
+                    {{/keyValues}}
+                </dl>
+            </div>
+        </div>
+        {{/instances}}
+    </div>
+</div>
+{{/classes}}
+
+<script type="text/javascript">
+    Array.prototype.forEach.call(document.querySelectorAll(".class > .heading"), function(heading) {
+        heading.onclick = function(){
+            var name = this.getAttribute("data-collapse");
+            var container = document.getElementById(name);
+            container.classList.toggle("collapsed");
+            this.classList.toggle("collapsed");
+        };
+    });
+</script>
+</body>
+</html>
