@@ -16,8 +16,9 @@
         </repository>
         <repository>
             <id>SNET butyeboi</id>
-            <url>http://www.user.tu-berlin.de/butyeboi/mvn/public</url>
-            <releases>
+            <!-- <url>http://www.user.tu-berlin.de/butyeboi/mvn/public</url> -->
+            <url>http://www.user.tu-berlin.de/thatmann/mvn/public</url>
+            <releases> 
                 <updatePolicy>always</updatePolicy>
             </releases>
         </repository>
