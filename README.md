@@ -1,5 +1,5 @@
 # Entrance-Backend
-The Entrance Backend consits of an Attribute Authority (AA) for Attribute-based Encryption,  an RESTlike User and Container API, an OrientDB
+The Entrance Backend consits of an Attribute Authority (AA) for Attribute-based Encryption, an RESTlike User and Container API, an OrientDB. We implemented the ABE scheme  "Practical Attribute-Based Encryption: Traitor Tracing, Revocation, and Large Universe" (https://eprint.iacr.org/2014/616).
 
 
 ### SETUP guideline:
@@ -262,6 +262,7 @@ How to run:
 ```
 
 Information:
+
     - "span" determines one time interval as unix timestamps. Multiple time intervals can be provided in "expire".
         - If "span" consists of only one integer, that integer is assumed to be the start time with no end time.
         - If "span" consists of two integers, those determine the access interval
